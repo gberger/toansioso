@@ -6,8 +6,6 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk(process.env.MONGOLAB_URI);
 
-var goCheck = require(.'/app/go-check');
-
 
 app.use(bodyParser());
 app.use(express.static(__dirname + '/public'));
@@ -17,7 +15,7 @@ app.use(function(req, res, next) {
 })
 
 app.get('./go-check', function(req, res){
-  goCheck(req.db, concurrency);
+  require('./app/go-check')(req.db, concurrency);
   res.send(200);
 })
 app.post('/register', require('./app/register'));
