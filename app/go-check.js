@@ -25,13 +25,18 @@ module.exports = function(db, concurrency) {
             }).then(function(){
               // mail sent
               console.log('Mail sent, removing user ' + user.email);
-              users.remove({_id: user._id});
+              users.remove({_id: user._id}, function(err){
+                console.log('User removed.');
+                callback(null);
+              });
             }, function(){
               // mail error
               console.error('ERROR! Mail not sent, keeping user ' + user.email);
+              callback(null);
             })
+          } else {
+            callback(null);
           }
-          callback(null);
         }, function(){
           console.error('ERROR while checking user ' + user.email);
           callback(null);
