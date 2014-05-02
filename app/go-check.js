@@ -19,17 +19,12 @@ var queue = async.queue(function(user, callback) {
 var populateQueue = function(db){
   var users = db.get('users');
   users.find({done: false}, function(err, all){
-    if(err){
-      res.send(500);
-    }
-
     all.forEach(function(user){
       queue.push(user);
     })
   })
 }
 
-module.exports = function(req, res) {
-  populateQueue(req.db);
-  res.send(200);
+module.exports = function(db) {
+  populateQueue(db);
 }

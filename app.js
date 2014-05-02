@@ -1,5 +1,7 @@
+var goCheck = require('./app/go-check');
+
 var express = require('express');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var app = express();
 
 var mongo = require('mongodb');
@@ -14,10 +16,14 @@ app.use(function(req, res, next) {
   next();
 })
 
-app.get('/go-check', require('./app/go-check'));
 app.post('/register', require('./app/register'));
 
 var port = Number(process.env.PORT || 3000);
 app.listen(port, function(){
   console.log("Listening on " + port);
 })
+
+setInterval(function(){
+  console.log('Starting check...');
+  goCheck(db);
+}, 2*60*1000);
