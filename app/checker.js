@@ -28,4 +28,4 @@ module.exports = function(email, password, url) {
   });
 
   return def.promise;
-}
+};

@@ -7,5 +7,4 @@ var monk = require('monk');
 var db = monk(process.env.MONGOLAB_URI);
 var concurrency = Number(process.env.CONCURRENCY || 2)
 
-console.log('Starting check...');
 goCheck(db, concurrency);
