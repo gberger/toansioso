@@ -23,7 +23,10 @@ app.listen(port, function(){
   console.log("Listening on " + port);
 })
 
+
+var interval = Number(process.env.INTERVAL || 2);
+var concurrency = Number(process.env.CONCURRENCY || 2)
 setInterval(function(){
   console.log('Starting check...');
-  goCheck(db);
-}, 2*60*1000);
+  goCheck(db, concurrency);
+}, interval*60*1000);
