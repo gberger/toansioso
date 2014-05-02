@@ -2,7 +2,7 @@ var Deferred = require('deferred');
 var Sendgrid = require('sendgrid');
 
 if(!process.env.SENDGRID_USERNAME || !process.env.SENDGRID_PASSWORD){
-  console.log('NO SENDGRID CREDENTIALS');
+  console.error('NO SENDGRID CREDENTIALS!');
   process.exit(1);
 }
 
@@ -12,7 +12,7 @@ module.exports = function(opts) {
   var def = Deferred();
 
   if(!opts.from) {
-    opts.from = process.env.MAIL_ACCOUNT;
+    opts.from = process.env.MAIL_ACCOUNT || 'toansioso@gmail.com';
   }
 
   sendgrid.send(opts, function(error, response){

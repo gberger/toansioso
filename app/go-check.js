@@ -15,7 +15,7 @@ module.exports = function(db, concurrency) {
       return function(callback){
         console.log('Checking user ' + user.email + ' (' + user.n + ')');
         checker(user.email, user.password, user.url).then(function(n){
-          console.log('Have checked user ' + user.email);
+          console.log('Checked  user ' + user.email);
           if(n > user.n){
             console.log('Sending mail to user ' + user.email)
             mailer.send(user.email).then(function(){
@@ -24,12 +24,12 @@ module.exports = function(db, concurrency) {
               users.remove({_id: user._id});
             }, function(){
               // mail error
-              console.log('ERROR! Mail not sent, keeping user ' + user.email);
+              console.error('ERROR! Mail not sent, keeping user ' + user.email);
             })
           }
           callback(null);
         }, function(){
-          console.log('Error checking user ' + user.email);
+          console.error('ERROR while checking user ' + user.email);
           callback(null);
         });
       }
