@@ -17,6 +17,7 @@ app.use(function(req, res, next) {
 })
 
 app.post('/register', require('./app/register'));
+app.get('/unregister', require('./app/unregister'));
 
 var port = Number(process.env.PORT || 3000);
 app.listen(port, function(){

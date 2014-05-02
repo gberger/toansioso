@@ -13,13 +13,24 @@ module.exports = function(req, res) {
     } else {
       checker(email, password, url).then(function(docs){
         // success
-        var promise = users.insert({email: email, password: password, url: url, done: false, last: new Date()});
+        var token = require('crypto').randomBytes(16).toString('hex');
+        
+        var promise = users.insert({
+          email: email, 
+          password: password, 
+          url: url, 
+          done: false, 
+          last: new Date(), 
+          token: token
+        });
+        
         promise.error(function(err){
           res.json(500, {error: 'DB_ERROR.'});
-        })
+        });
+        
         promise.success(function(doc){
           res.json(200, {docs: docs});
-        })
+        });
       }, function(reason){
         //error
         res.json(400, {error: reason});

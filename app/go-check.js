@@ -1,5 +1,5 @@
-var checker = require('../app/checker');
-var mailer = require('../app/mailer');
+var checker = require('./checker');
+var mailer = require('./mails/toa');
 var async = require('async');
 
 var makeQueue = function(concurrency){

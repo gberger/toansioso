@@ -9,17 +9,14 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
     }
 });
 
-module.exports = function(to) {
+module.exports = function(opts) {
   var def = Deferred();
 
-  var mailOptions = {
-    from: "TOAnsioso <toansioso@gmail.com>",
-    to: to,
-    subject: "Seu TOA chegou!",
-    html: '<b>Seu TOA chegou!</b> Acesse o <a href="https://mycusthelp.info/IIE/_cs/Login.aspx">portal do Grantee</a> para vê-lo. :)'
+  if(!opts.from) {
+    opts.from = "TOAnsioso <toansioso@gmail.com>";
   }
 
-  smtpTransport.sendMail(mailOptions, function(error, response){
+  smtpTransport.sendMail(opts, function(error, response){
     if(error){
       def.reject(error);
     } else {
