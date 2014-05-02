@@ -1,4 +1,4 @@
-#! /app/bin/node
+#! /app/vendor/node/bin/node
 
 var goCheck = require('../app/go-check');
 var mongo = require('mongodb');
