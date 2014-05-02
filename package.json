@@ -1,0 +1,15 @@
+{
+  "name": "toa",
+  "version": "0.1.0",
+  "description": "Check for TOA",
+  "main": "toa.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Guilherme Berger <guilherme.berger@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^0.6.2",
+    "zombie": "^2.0.0-alpha31"
+  }
+}
