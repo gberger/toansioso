@@ -1,26 +1,25 @@
 var Deferred = require('deferred');
-var nodemailer = require("nodemailer");
+var Sendgrid = require('sendgrid');
 
-var smtpTransport = nodemailer.createTransport("SMTP",{
-    service: "Gmail",
-    auth: {
-        user: process.env.MAIL_ACCOUNT,
-        pass: process.env.MAIL_PASSWORD
-    }
-});
+if(!process.env.SENDGRID_USERNAME || !process.env.SENDGRID_PASSWORD){
+  console.log('NO SENDGRID CREDENTIALS');
+  process.exit(1);
+}
+
+var sendgrid = Sendgrid(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
 
 module.exports = function(opts) {
   var def = Deferred();
 
   if(!opts.from) {
-    opts.from = "TOAnsioso <" + process.env.MAIL_ACCOUNT + ">";
+    opts.from = process.env.MAIL_ACCOUNT;
   }
 
-  smtpTransport.sendMail(opts, function(error, response){
+  sendgrid.send(opts, function(error, response){
     if(error){
       def.reject(error);
     } else {
-      def.resolve(response.message);
+      def.resolve(response);
     }
   });
 
