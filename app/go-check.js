@@ -18,7 +18,7 @@ module.exports = function(db, concurrency) {
           console.log('Checked  user ' + user.email);
           if(n > user.n){
             console.log('Sending mail to user ' + user.email)
-            mailer.send({
+            mailer({
               to: user.email,
               from: 'toa@toansioso.herokuapp.com',
               subject: "Seu TOA está aqui!",

@@ -34,7 +34,7 @@ module.exports = function(req, res) {
         promise.success(function(doc){
           res.json(200, {docs: docs});
           var url = process.env.URL + 'unregister?token=' + token;
-          mailer.send({
+          mailer({
             to: email,
             from: 'toa@toansioso.herokuapp.com',
             subject: 'Bem-vindo ao TOAnsioso',
