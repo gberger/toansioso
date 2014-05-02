@@ -6,7 +6,7 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk(process.env.MONGOLAB_URI);
 
-var goCheck = require('../app/go-check');
+var goCheck = require(.'/app/go-check');
 
 
 app.use(bodyParser());

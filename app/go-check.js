@@ -13,12 +13,10 @@ module.exports = function(db, concurrency) {
         console.log('Checking user ' + user.email)
         checker(user.email, user.password, user.url).then(function(n){
           console.log('Have checked user ' + user.email)
-          var done = n > 1
-          if(done){
+          if(n > 1){
             mailer.send(user.email);
+            users.remove({_id: user._id});
           }
-          users.update({_id: user._id}, {done: done, last: new Date()});
-          callback(null, done);
         }, function(){
           console.log('Error checking user ' + user.email);
           callback(null, null);
@@ -26,6 +24,9 @@ module.exports = function(db, concurrency) {
       }
     });
 
-    async.parallelLimit(tasks, concurrency);    
+    async.parallelLimit(tasks, concurrency, function(){
+      console.log('Done!');
+      process.exit(0);
+    });
   });
 };
