@@ -14,10 +14,6 @@ app.use(function(req, res, next) {
   next();
 })
 
-app.get('./go-check', function(req, res){
-  require('./app/go-check')(req.db, concurrency);
-  res.send(200);
-})
 app.post('/register', require('./app/register'));
 app.get('/unregister', require('./app/unregister'));
 
