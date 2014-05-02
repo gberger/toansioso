@@ -20,8 +20,7 @@ module.exports = function(db, concurrency) {
             console.log('Sending mail to user ' + user.email)
             mailer({
               to: user.email,
-              from: 'toa@toansioso.herokuapp.com',
-              subject: "Seu TOA está aqui!",
+              subject: "Seu TOA está aqui! - TOAnsioso",
               html: '<b>Seu TOA está aqui!</b> Acesse o <a href="https://mycusthelp.info/IIE/_cs/Login.aspx">portal do Grantee</a> para vê-lo. :)'
             }).then(function(){
               // mail sent

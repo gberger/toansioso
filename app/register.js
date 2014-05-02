@@ -36,7 +36,6 @@ module.exports = function(req, res) {
           var url = process.env.URL + 'unregister?token=' + token;
           mailer({
             to: email,
-            from: 'toa@toansioso.herokuapp.com',
             subject: 'Bem-vindo ao TOAnsioso',
             html: '<b>Olá!</b> Agora fique tranquilo que lhe enviaremos um email quando seu TOA chegar. <br>' +
                   'Caso queira CANCELAR seu cadastro no TOAnsioso, clique em: <a href="'+url+'">'+url+'</a>. ' +
