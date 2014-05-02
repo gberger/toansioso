@@ -27,9 +27,9 @@ Add the Heroku Scheduler addon to your app: `heroku addons:add scheduler`
 
 Use `heroku config:set KEY=VALUE` to set the following configurations:
 
-    URL: the URL the app will run on. Usually, http://NAME.herokuapp.com/. Please include the trailing '/'.
-    MAIL_ACCOUNT: the GMAIL account that will SEND emails to subscribers (example: toansioso@gmail.com). It MUST be a Gmail account.
-    MAIL_PASSWORD: the password of this account (example: pass1234)
+ * `URL`: the URL the app will run on. Usually, http://NAME.herokuapp.com/. Please include the trailing '/'.
+ * `MAIL_ACCOUNT`: the GMAIL account that will SEND emails to subscribers (example: toansioso@gmail.com). It MUST be a Gmail account.
+ * `MAIL_PASSWORD`: the password of this account (example: pass1234)
 
 For example, you'd need to run `heroku config:set MAIL_ACCOUNT=myemail@gmail.com`.
 
