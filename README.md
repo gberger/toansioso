@@ -21,17 +21,18 @@ Run `heroku login` and login to your Heroku account.
 
 Run `heroku create NAME` to create a new Heroku app using this project. NAME can be whatever you want (as long as it's available).
 
-Add the Mongolab addon to your app: `heroku addons:add mongolab`
+Add the Mongolab addon to your app: `heroku addons:add mongolab`. This is your database.
 
-Add the Heroku Scheduler addon to your app: `heroku addons:add scheduler`
+Add the Heroku Scheduler addon to your app: `heroku addons:add scheduler`. This is your job scheduler.
+
+Add the SendGrid addon to your app: `heroku addons:add sendgrid`. This is your email sender.
 
 Use `heroku config:set KEY=VALUE` to set the following configurations:
 
  * `URL`: the URL the app will run on. Usually, http://NAME.herokuapp.com/. Please include the trailing '/'.
- * `MAIL_ACCOUNT`: the GMAIL account that will SEND emails to subscribers (example: toansioso@gmail.com). It MUST be a Gmail account.
- * `MAIL_PASSWORD`: the password of this account (example: pass1234)
+ * `MAIL_ACCOUNT`: the email address account that will SEND emails to subscribers (example: toansioso@gmail.com). It can be any email address, really.
 
-For example, you'd need to run `heroku config:set MAIL_ACCOUNT=myemail@gmail.com`.
+For example, you'd need to run `heroku config:set MAIL_ACCOUNT=myemail@gmail.com`, etc.
 
 Now, run `heroku addons:open scheduler`, which will take you to your browser on the Scheduler dashboard. There, "Add Job". For the task name, use 'worker'. Keep the dyno size at 1X and set the frequency you'd like to run the TOA checking. Save it.
 
