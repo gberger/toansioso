@@ -1,170 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="TOAnsioso - Receba um email quando seu TOA chegar!">
-    <meta name="author" content="Guilherme Berger">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TOAnsioso - Receba um email quando seu TOA chegar!">
+  <meta name="author" content="Guilherme Berger">
 
-    <meta property="og:image" content="http://i.imgur.com/zEYoB8Y.png"/>
+  <meta property="og:image" content="http://i.imgur.com/zEYoB8Y.png"/>
 
-    <title>TOAnsioso</title>
+  <title>TOAnsioso</title>
 
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
-    <style>
-      body {
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background-color: #eee;
-      }
-
-      .container {
-        max-width: 330px;
-        padding: 15px;
-        margin: 0 auto;
-      }
-      .form-signin .form-control {
-        position: relative;
-        height: auto;
-        -webkit-box-sizing: border-box;
-           -moz-box-sizing: border-box;
-                box-sizing: border-box;
-        padding: 10px;
-        font-size: 16px;
-      }
-      .form-signin .form-control:focus {
-        z-index: 2;
-      }
-      .email {
-        margin-bottom: -1px;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-      }
-      .password {
-        margin-bottom: -1px;
-        border-radius: 0;
-      }
-      .url {
-        margin-bottom: 10px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-      }
-
-      .footer {
-        margin-top: 40px;
-      }
-    </style>    
-
-  </head>
-
-  <body>
-
-  <a href="https://github.com/gberger/toa"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
-
-    <div class="container">
-      <h2>TOAnsioso</h2>
-
-      <div class="alerts"></div>
-
-      <form class="form-signin" role="form" method="post" action="/register">
-        <p>Nos campos "email" e "password", use seus dados do site do Grantee.</p>
-        <p>Para o campo URL, vá ao <a href="https://mycusthelp.info/IIE/_cs/Login.aspx">site do Grantee</a>, faça login, e navegue até a página onde aparece o TOA (aquela que tem o "Documents you have uploaded (1)"). Copie o endereço e cole no campo URL.</p>
-        <p>Você será avisado nesse email quando seu TOA chegar.</p>
-
-        <input name="email" type="email" class="form-control email" placeholder="Email" required autofocus>
-        <input name="password" type="password" class="form-control password" placeholder="Password" required>
-        <input name="url" type="url" class="form-control url" placeholder="URL" required>
-
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Me avise!</button>
-      </form>
-
-      <div class="loading" style="display: none;">Carregando... Por favor, aguarde até 1 minuto.</div>
-
-      <div class="text-muted text-right footer">
-        Criado por <a href="https://www.facebook.com/gberger">Guilherme Berger</a>
-      </div>
-
-    </div> 
-  </body>
-
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-38564882-8', 'toansioso.herokuapp.com');
-    ga('send', 'pageview');
-  </script>
-
-  <script>
-    var addAlert = function(klass, msg){
-      var alert = $('<div class="alert alert-' + klass + '">' + msg + '</div>')
-      $('.alerts').prepend(alert);
+  <style>
+    body {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: #eee;
     }
 
-    var clearAlerts = function(){
-      $('.alert').remove();
+    .container {
+      max-width: 330px;
+      padding: 15px;
+      margin: 0 auto;
+    }
+    .form-signin .form-control {
+      position: relative;
+      height: auto;
+      -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+              box-sizing: border-box;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+      z-index: 2;
+    }
+    .email {
+      margin-bottom: -1px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    .password {
+      margin-bottom: -1px;
+      border-radius: 0;
+    }
+    .url {
+      margin-bottom: 10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
     }
 
-    var validateURL = function(url){
-      var regex = /^https?\:\/\/mycusthelp\.info\/IIE\/_cs\/CODetails.aspx/;
-      return regex.test(url);
-    };
+    .footer {
+      margin-top: 40px;
+    }
+  </style>    
 
-    $(function(){
-      $('form').on('submit', function(event){
-        event.preventDefault();
-        clearAlerts();
+</head>
 
-        var email = $('.email').val();
-        var password = $('.password').val();
-        var url = $('.url').val();
+<body>
 
-        if(!validateURL(url)){
-          ga('send', 'event', 'SUBMISSION', 'WRONG_URL');
-          addAlert('danger', 'Parece que a URL não está correta... Siga novamente as instruções e tente novamente!');
-          return;
+  <div class="container">
+
+    <img src="http://i.imgur.com/zEYoB8Y.png" alt="TOAnsioso" class="hidden"></img>
+
+    <h1>TOAnsioso</h1>
+
+    <div class="alerts"></div>
+
+    <form class="form-signin" role="form" method="post" action="/register">
+      <p>Nos campos "email" e "password", use seus dados do site do Grantee.</p>
+      <p>Para o campo URL, vá ao <a href="https://mycusthelp.info/IIE/_cs/Login.aspx">site do Grantee</a>, faça login, e navegue até a página onde aparece o TOA (aquela que tem o "Documents you have uploaded (1)"). Copie o endereço e cole no campo URL.</p>
+      <p>Você será avisado nesse email quando seu TOA chegar.</p>
+
+      <input name="email" type="email" class="form-control email" placeholder="Email" required autofocus>
+      <input name="password" type="password" class="form-control password" placeholder="Password" required>
+      <input name="url" type="url" class="form-control url" placeholder="URL" required>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Me avise!</button>
+    </form>
+
+    <div class="loading" style="display: none;">Carregando... Por favor, aguarde até 1 minuto.</div>
+
+    <div class="text-muted text-right footer">
+      Criado por <a href="https://www.facebook.com/gberger">Guilherme Berger</a>
+    </div>
+
+  </div> 
+
+  <a href="https://github.com/gberger/toa"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-38564882-8', 'toansioso.herokuapp.com');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  var addAlert = function(klass, msg){
+    var alert = $('<div class="alert alert-' + klass + '">' + msg + '</div>')
+    $('.alerts').prepend(alert);
+  }
+
+  var clearAlerts = function(){
+    $('.alert').remove();
+  }
+
+  var validateURL = function(url){
+    var regex = /^https?\:\/\/mycusthelp\.info\/IIE\/_cs\/CODetails.aspx/;
+    return regex.test(url);
+  };
+
+  $(function(){
+    $('form').on('submit', function(event){
+      event.preventDefault();
+      clearAlerts();
+
+      var email = $('.email').val();
+      var password = $('.password').val();
+      var url = $('.url').val();
+
+      if(!validateURL(url)){
+        ga('send', 'event', 'SUBMISSION', 'WRONG_URL');
+        addAlert('danger', 'Parece que a URL não está correta... Siga novamente as instruções e tente novamente!');
+        return;
+      }
+
+      ga('send', 'event', 'Submission', 'START');
+      var promise = $.post('/register', {email: email, password: password, url: url});
+      $('form').hide();
+      $('.loading').show()
+
+      promise.always(function(){
+        $('.loading').hide();
+      })
+
+      promise.fail(function(res){
+        var err = res.responseJSON.error;
+
+        ga('send', 'event', 'Submission', err);
+        
+        $('form').show();
+
+        if(err === 'WRONG_CREDENTIALS'){
+          addAlert('danger', 'Email e/ou senha errados. Por favor, verifique e tente novamente.');
+          $('.password').val('');
+        } else if(err === 'WRONG_URL'){
+          addAlert('danger', 'URL inválida. Por favor, verifique e tente novamente.' );
+          $('.url').val('');
+        } else if(err === 'DUPLICATE'){
+          addAlert('warning', 'Você já se cadastrou. Agora é só esperar! :)')
+          $('form').hide();
+        } else if(err === 'DB_ERROR'){
+          addAlert('warning', 'Desculpe, ocorreu um erro no banco de dados. Por favor, tente novamente. Se o error persistir, entre em contato.')
         }
 
-        ga('send', 'event', 'Submission', 'START');
-        var promise = $.post('/register', {email: email, password: password, url: url});
-        $('form').hide();
-        $('.loading').show()
+      })
 
-        promise.always(function(){
-          $('.loading').hide();
-        })
-
-        promise.fail(function(res){
-          var err = res.responseJSON.error;
-
-          ga('send', 'event', 'Submission', err);
-          
-          $('form').show();
-
-          if(err === 'WRONG_CREDENTIALS'){
-            addAlert('danger', 'Email e/ou senha errados. Por favor, verifique e tente novamente.');
-            $('.password').val('');
-          } else if(err === 'WRONG_URL'){
-            addAlert('danger', 'URL inválida. Por favor, verifique e tente novamente.' );
-            $('.url').val('');
-          } else if(err === 'DUPLICATE'){
-            addAlert('warning', 'Você já se cadastrou. Agora é só esperar! :)')
-            $('form').hide();
-          } else if(err === 'DB_ERROR'){
-            addAlert('warning', 'Desculpe, ocorreu um erro no banco de dados. Por favor, tente novamente. Se o error persistir, entre em contato.')
-          }
-
-        })
-
-        promise.success(function(){
-          ga('send', 'event', 'Submission', 'OK')
-          addAlert('success', 'Pronto! Agora é só esperar que enviaremos um email quando seu TOA chegar. Boa sorte!')
-        })
+      promise.success(function(){
+        ga('send', 'event', 'Submission', 'OK')
+        addAlert('success', 'Pronto! Agora é só esperar que enviaremos um email quando seu TOA chegar. Boa sorte!')
       })
     })
-  </script>
+  })
+</script>
+
+</body>
 </html>
