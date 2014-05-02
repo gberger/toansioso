@@ -15,7 +15,7 @@ module.exports = function(opts) {
     opts.from = process.env.MAIL_ACCOUNT || 'toansioso@gmail.com';
   }
 
-  sendgrid(opts, function(error, response){
+  sendgrid.send(opts, function(error, response){
     if(error){
       def.reject(error);
     } else {
