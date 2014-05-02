@@ -14,6 +14,7 @@ app.use(function(req, res, next) {
   next();
 })
 
+app.get('/go-check', require('./app/go-check'));
 app.post('/register', require('./app/register'));
 
 var port = Number(process.env.PORT || 3000);

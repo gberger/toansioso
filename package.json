@@ -9,12 +9,14 @@
   "author": "Guilherme Berger <guilherme.berger@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "async": "^0.8.0",
     "body-parser": "^1.0.2",
     "deferred": "^0.7.1",
     "express": "^4.1.1",
     "jade": "^1.3.1",
     "mongodb": "^1.4.3",
     "monk": "^0.8.1",
+    "nodemailer": "^0.6.3",
     "zombie": "^2.0.0-alpha31"
   }
 }
