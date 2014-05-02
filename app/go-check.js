@@ -1,5 +1,5 @@
 var checker = require('./checker');
-var mailer = require('./mails/toa');
+var mailer = require('./mailer');
 var async = require('async');
 
 module.exports = function(db, concurrency) {
@@ -18,7 +18,12 @@ module.exports = function(db, concurrency) {
           console.log('Checked  user ' + user.email);
           if(n > user.n){
             console.log('Sending mail to user ' + user.email)
-            mailer.send(user.email).then(function(){
+            mailer.send({
+              to: user.email,
+              from: 'toa'
+              subject: "Seu TOA está aqui!",
+              html: '<b>Seu TOA está aqui!</b> Acesse o <a href="https://mycusthelp.info/IIE/_cs/Login.aspx">portal do Grantee</a> para vê-lo. :)'
+            }).then(function(){
               // mail sent
               console.log('Mail sent, removing user ' + user.email);
               users.remove({_id: user._id});

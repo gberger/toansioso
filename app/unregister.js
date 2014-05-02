@@ -1,4 +1,3 @@
-var mailer = require('./mails/welcome.js')
 var checker = require('./checker');
 
 module.exports = function(req, res) {

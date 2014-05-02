@@ -1,3 +1,4 @@
+var mailer = require('./mailer');
 var checker = require('./checker');
 
 module.exports = function(req, res) {
@@ -32,6 +33,14 @@ module.exports = function(req, res) {
         
         promise.success(function(doc){
           res.json(200, {docs: docs});
+          var url = process.env.URL + 'unregister?token=' + token;
+          mailer.send({
+            to: email,
+            subject: 'Bem-vindo ao TOAnsioso',
+            html: '<b>Olá!</b> Agora fique tranquilo que lhe enviaremos um email quando seu TOA chegar. <br>' +
+                  'Caso queira CANCELAR seu cadastro no TOAnsioso, clique em: <a href="'+url+'">'+url+'</a>. ' +
+                  'Isso não afeta sua inscrição no CSF.'
+          }
         });
       }, function(reason){
         //error
