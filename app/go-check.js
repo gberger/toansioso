@@ -17,9 +17,10 @@ module.exports = function(db, concurrency) {
             mailer.send(user.email);
             users.remove({_id: user._id});
           }
+          callback(null);
         }, function(){
           console.log('Error checking user ' + user.email);
-          callback(null, null);
+          callback(null);
         });
       }
     });
