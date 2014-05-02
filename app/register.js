@@ -19,6 +19,7 @@ module.exports = function(req, res) {
         var promise = users.insert({
           email: email, 
           password: password, 
+          n: n,
           url: url, 
           done: false, 
           last: new Date(), 
