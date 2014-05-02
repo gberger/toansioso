@@ -4,7 +4,7 @@ var nodemailer = require("nodemailer");
 var smtpTransport = nodemailer.createTransport("SMTP",{
     service: "Gmail",
     auth: {
-        user: "toansioso@gmail.com",
+        user: process.env.MAIL_ACCOUNT,
         pass: process.env.MAIL_PASSWORD
     }
 });
@@ -13,7 +13,7 @@ module.exports = function(opts) {
   var def = Deferred();
 
   if(!opts.from) {
-    opts.from = "TOAnsioso <toansioso@gmail.com>";
+    opts.from = "TOAnsioso <" + process.env.MAIL_ACCOUNT + ">";
   }
 
   smtpTransport.sendMail(opts, function(error, response){

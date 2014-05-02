@@ -1,7 +1,7 @@
 var mailer = require('../mailer');
 
 module.exports = function(user) {
-  var url = 'http://toansioso.herokuapp.com/unregister?token=' + user.token;
+  var url = process.env.URL + 'unregister?token=' + user.token;
   return mailer({
     to: user.email,
     subject: 'Bem-vindo ao TOAnsioso',
