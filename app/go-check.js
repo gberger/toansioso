@@ -9,11 +9,13 @@ module.exports = function(db, concurrency) {
 
   users.find({done: false}, function(err, all){
     var tasks = all.map(function(user){
+      user.n = user.n || 1;
       return function(callback){
-        console.log('Checking user ' + user.email)
+        console.log('Checking user ' + user.email + ' (' + user.n + ')'))
         checker(user.email, user.password, user.url).then(function(n){
-          console.log('Have checked user ' + user.email)
-          if(n > 1){
+          console.log('Have checked user ' + user.email);
+          if(n > user.n){
+            console.log('Sending mail and removing user ' + user.mail)
             mailer.send(user.email);
             users.remove({_id: user._id});
           }

@@ -4,6 +4,7 @@ module.exports = function(req, res) {
   var email = req.body.email;
   var password = req.body.password;
   var url = req.body.url;
+  var n = parseInt(req.body.n, 10) || 1;
 
   var users = req.db.get('users');
 

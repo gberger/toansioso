@@ -37,16 +37,16 @@
     .form-signin .form-control:focus {
       z-index: 2;
     }
-    .email {
+    .form-control:first-child {
       margin-bottom: -1px;
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
     }
-    .password {
+    .form-control:not(:first-child):not(:last-child) {
       margin-bottom: -1px;
       border-radius: 0;
     }
-    .url {
+    .form-control:last-child {
       margin-bottom: 10px;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
@@ -71,12 +71,16 @@
 
     <form class="form-signin" role="form" method="post" action="/register">
       <p>Nos campos "email" e "password", use seus dados do site do Grantee.</p>
+      <p>O número de documentos já enviados geralmente é 1.</p>
       <p>Para o campo URL, vá ao <a href="https://mycusthelp.info/IIE/_cs/Login.aspx">site do Grantee</a>, faça login, e navegue até a página onde aparece o TOA (aquela que tem o "Documents you have uploaded (1)"). Copie o endereço e cole no campo URL.</p>
       <p>Você será avisado nesse email quando seu TOA chegar.</p>
-
-      <input name="email" type="email" class="form-control email" placeholder="Email" required autofocus>
-      <input name="password" type="password" class="form-control password" placeholder="Password" required>
-      <input name="url" type="url" class="form-control url" placeholder="URL" required>
+      
+      <div>
+        <input name="email" type="email" class="form-control" placeholder="Email" required autofocus>
+        <input name="n" type="number" class="form-control" placeholder="Número de documents já enviados" required>
+        <input name="password" type="password" class="form-control" placeholder="Password" required>
+        <input name="url" type="url" class="form-control" placeholder="URL" required>
+      </div>
 
       <button class="btn btn-lg btn-primary btn-block" type="submit">Me avise!</button>
     </form>
@@ -121,9 +125,10 @@
       event.preventDefault();
       clearAlerts();
 
-      var email = $('.email').val();
-      var password = $('.password').val();
-      var url = $('.url').val();
+      var email = $('[name=email]').val();
+      var password = $('[name=password]').val();
+      var n = $('[name=n]').val();
+      var url = $('[name=url]').val();
 
       if(!validateURL(url)){
         ga('send', 'event', 'SUBMISSION', 'WRONG_URL');
@@ -132,7 +137,7 @@
       }
 
       ga('send', 'event', 'Submission', 'START');
-      var promise = $.post('/register', {email: email, password: password, url: url});
+      var promise = $.post('/register', {email: email, password: password, n: n, url: url});
       $('form').hide();
       $('.loading').show()
 
@@ -149,10 +154,10 @@
 
         if(err === 'WRONG_CREDENTIALS'){
           addAlert('danger', 'Email e/ou senha errados. Por favor, verifique e tente novamente.');
-          $('.password').val('');
+          $('[name=password]').val('');
         } else if(err === 'WRONG_URL'){
           addAlert('danger', 'URL inválida. Por favor, verifique e tente novamente.' );
-          $('.url').val('');
+          $('[name=url]').val('');
         } else if(err === 'DUPLICATE'){
           addAlert('warning', 'Você já se cadastrou. Agora é só esperar! :)')
           $('form').hide();
