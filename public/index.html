@@ -97,7 +97,6 @@
 
     ga('create', 'UA-38564882-8', 'toansioso.herokuapp.com');
     ga('send', 'pageview');
-
   </script>
 
   <script>
@@ -125,12 +124,12 @@
         var url = $('.url').val();
 
         if(!validateURL(url)){
-          _trackEvent('SUBMISSION', 'WRONG_URL');
+          ga('send', 'event', 'SUBMISSION', 'WRONG_URL');
           addAlert('danger', 'Parece que a URL não está correta... Siga novamente as instruções e tente novamente!');
           return;
         }
 
-        _trackEvent('Submission', 'START');
+        ga('send', 'event', 'Submission', 'START');
         var promise = $.post('/register', {email: email, password: password, url: url});
         $('form').hide();
         $('.loading').show()
@@ -142,7 +141,7 @@
         promise.fail(function(res){
           var err = res.responseJSON.error;
 
-          _trackEvent('Submission', err);
+          ga('send', 'event', 'Submission', err);
           
           $('form').show();
 
@@ -162,7 +161,7 @@
         })
 
         promise.success(function(){
-          _trackEvent('Submission', 'OK')
+          ga('send', 'event', 'Submission', 'OK')
           addAlert('success', 'Pronto! Agora é só esperar que enviaremos um email quando seu TOA chegar. Boa sorte!')
         })
       })
