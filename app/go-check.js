@@ -9,15 +9,23 @@ module.exports = function(db, concurrency) {
 
   users.find({done: false}, function(err, all){
     var tasks = all.map(function(user){
-      user.n = user.n || 1;
+      if(user.n === null || user.n === undefined){
+        user.n = 1;
+      }
       return function(callback){
-        console.log('Checking user ' + user.email + ' (' + user.n + ')'))
+        console.log('Checking user ' + user.email + ' (' + user.n + ')');
         checker(user.email, user.password, user.url).then(function(n){
           console.log('Have checked user ' + user.email);
           if(n > user.n){
-            console.log('Sending mail and removing user ' + user.mail)
-            mailer.send(user.email);
-            users.remove({_id: user._id});
+            console.log('Sending mail to user ' + user.email)
+            mailer.send(user.email).then(function(){
+              // mail sent
+              console.log('Mail sent, removing user ' + user.email);
+              users.remove({_id: user._id});
+            }, function(){
+              // mail error
+              console.log('ERROR! Mail not sent, keeping user ' + user.email);
+            })
           }
           callback(null);
         }, function(){
