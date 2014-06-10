@@ -7,7 +7,7 @@ module.exports = function(req, res) {
   var url = req.body.url;
   var n = parseInt(req.body.n, 10);
 
-  if(n === NaN || n === null || n === undefined){
+  if(isNaN(n) || n === null || n === undefined){
     n = 1;
   }
 

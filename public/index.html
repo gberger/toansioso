@@ -133,7 +133,9 @@
   };
 
   $(function(){
-    $('.toansioso-form').on('submit', function(event){
+    var $form = $('.toansioso-form');
+
+    $form.on('submit', function(event){
       event.preventDefault();
       clearAlerts();
 
@@ -151,18 +153,18 @@
       ga('send', 'event', 'Submission', 'START');
       var promise = $.post('/register', {email: email, password: password, n: n, url: url});
       $('.toansioso-form').hide();
-      $('.loading').show()
+      $('.loading').show();
 
       promise.always(function(){
         $('.loading').hide();
-      })
+      });
 
       promise.fail(function(res){
         var err = res.responseJSON.error;
 
         ga('send', 'event', 'Submission', err);
-        
-        $('.toansioso-form').show();
+
+        $form.show();
 
         if(err === 'WRONG_CREDENTIALS'){
           addAlert('danger', 'Email e/ou senha errados. Por favor, verifique e tente novamente.');
@@ -172,16 +174,16 @@
           $('[name=url]').val('');
         } else if(err === 'DUPLICATE'){
           addAlert('warning', 'Você já se cadastrou. Agora é só esperar! :)')
-          $('.toansioso-form').hide();
+          $form.hide();
         } else if(err === 'DB_ERROR'){
           addAlert('warning', 'Desculpe, ocorreu um erro no banco de dados. Por favor, tente novamente. Se o error persistir, entre em contato.')
         }
 
-      })
+      });
 
       promise.success(function(){
-        ga('send', 'event', 'Submission', 'OK')
-        addAlert('success', 'Pronto! Agora é só esperar que enviaremos um email quando seu TOA chegar. Boa sorte!')
+        addAlert('success', 'Pronto! Agora é só esperar que enviaremos um email quando seu TOA chegar. Boa sorte!');
+        ga('send', 'event', 'Submission', 'OK');
       })
     })
   })
