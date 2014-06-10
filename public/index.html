@@ -69,7 +69,7 @@
 
     <div class="alerts"></div>
 
-    <form class="form-signin" role="form" method="post" action="/register">
+    <form class="form-signin toansioso-form" role="form" method="post" action="/register">
       <p>Nos campos "email" e "password", use seus dados do site do Grantee.</p>
       <p>Para o campo URL, vá ao <a href="https://mycusthelp.info/IIE/_cs/Login.aspx" target="_blank">site do Grantee</a>, faça login, e navegue até a página onde aparece o TOA (aquela que tem o "Documents you have uploaded (1)"). Copie o endereço e cole no campo URL.</p>
       <p>O número de documentos já enviados geralmente é 1.</p>
@@ -133,7 +133,7 @@
   };
 
   $(function(){
-    $('form').on('submit', function(event){
+    $('.toansioso-form').on('submit', function(event){
       event.preventDefault();
       clearAlerts();
 
@@ -150,7 +150,7 @@
 
       ga('send', 'event', 'Submission', 'START');
       var promise = $.post('/register', {email: email, password: password, n: n, url: url});
-      $('form').hide();
+      $('.toansioso-form').hide();
       $('.loading').show()
 
       promise.always(function(){
@@ -162,7 +162,7 @@
 
         ga('send', 'event', 'Submission', err);
         
-        $('form').show();
+        $('.toansioso-form').show();
 
         if(err === 'WRONG_CREDENTIALS'){
           addAlert('danger', 'Email e/ou senha errados. Por favor, verifique e tente novamente.');
@@ -172,7 +172,7 @@
           $('[name=url]').val('');
         } else if(err === 'DUPLICATE'){
           addAlert('warning', 'Você já se cadastrou. Agora é só esperar! :)')
-          $('form').hide();
+          $('.toansioso-form').hide();
         } else if(err === 'DB_ERROR'){
           addAlert('warning', 'Desculpe, ocorreu um erro no banco de dados. Por favor, tente novamente. Se o error persistir, entre em contato.')
         }
