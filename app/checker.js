@@ -24,6 +24,8 @@ module.exports = function(email, password, url) {
     }
 
     var docs = parseInt(match[1], 10);
+    brower = null;
+    
     def.resolve(docs);
   });
 
