@@ -26,7 +26,7 @@ module.exports = function(db, concurrency) {
                 'Acesse o <a href="https://mycusthelp.info/IIE/_cs/Login.aspx">portal do Grantee</a> para vê-lo. :) <br/>'+
                 'Atenção: você foi descadastrado do TOAnsioso. Se o documento que chegou não foi o TOA, ' +
                 'lembre-se de <a href="http://toansioso.herokuapp.com/">cadastrar novamente</a>. '+
-                'Mas fique ao número de documentos!'
+                'Mas fique atento ao número de documentos!'
             }).then(function(){
               // mail sent
               console.log('Mail sent, removing user ' + user.email);
