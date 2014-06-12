@@ -5,7 +5,7 @@ var moment = require('moment');
 
 var nullCbFn = function(callback) { callback(null); };
 
-module.exports = function(db, concurrency) {
+module.exports = function(db, concurrency, partition) {
   console.log('Starting check...');
 
   var users = db.get('users');
@@ -32,11 +32,14 @@ module.exports = function(db, concurrency) {
       }
     }
 
-    var section = parseInt(minutes/10);
+    if(partition === undefined || partition === null) {
+      var partition = parseInt(minutes/10);
+    }
+    
     var total = all.length;
     var per = Math.ceil(total/6);
-    var min = section*per;
-    var max = (section+1)*per;
+    var min = partition*per;
+    var max = (partition+1)*per;
 
     var tasks = all.map(function(user, i){
 
