@@ -6,7 +6,7 @@ module.exports = function(partition) {
   var monk = require('monk');
 
   var db = monk(process.env.MONGOLAB_URI);
-  var concurrency = Number(process.env.CONCURRENCY || 2)
+  var concurrency = Number(process.env.CONCURRENCY || 2);
 
-  goCheck(db, concurrency, partition);
+  goCheck(db, concurrency, process.env.PARTITION);
 }

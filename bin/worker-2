@@ -1,3 +1,0 @@
-#! /app/vendor/node/bin/node
-
-var goCheck = require('../app/worker-base')(2);
