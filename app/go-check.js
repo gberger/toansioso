@@ -10,7 +10,7 @@ module.exports = function(db, concurrency) {
 
   var users = db.get('users');
 
-  var NYTIME = moment().subtract('hours', 3)
+  var NYTIME = moment().subtract('hours', 5)
   var hours = NYTIME.hours();
   var weekday = NYTIME.weekday();
   var minutes = NYTIME.minutes();
