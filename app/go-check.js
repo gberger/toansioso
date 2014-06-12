@@ -46,7 +46,7 @@ module.exports = function(db, concurrency, partition) {
     var tasks = all.map(function(user, i){
 
       if(i < min || i > max) {
-        console.log('Skipping user ' + user.email + ' (' + i + ') for now.');
+        // console.log('Skipping user ' + user.email + ' (' + i + ') for now.');
         return nullCbFn;
       }
 
