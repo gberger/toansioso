@@ -10,21 +10,29 @@ module.exports = function(db, concurrency) {
 
   var users = db.get('users');
 
+  var NYTIME = moment().subtract('hours', 3)
+  var hour = NYTIME.hours();
+  var weekday = NYTIME.weekday();
+  var minutes = NYTIME.minutes();
 
   users.find({done: false}, function(err, all){
 
-    // weekday filter
-    // on sat&sun, only work every 4 hours
-    var weekday = moment().weekday();
+    // filters
     if(weekday === 6 || weekday === 0) {
-      var hour = moment().hours();
+      // on sat&sun, only check every 4 hours
       if(hours % 4 !== 0){
-        console.log('Sat/sun skip.');
+        console.log('Weekend skip.');
+        return nullCbFn;
+      }
+    } else {
+      // on weekdays, 
+      if(hours == 23 || hours == 0 || hours == 1 || hours == 3 || hours == 4 || hours == 5) {
+        console.log('Weekday late night skip.');
         return nullCbFn;
       }
     }
 
-    var section = parseInt(moment().minutes()/10);
+    var section = parseInt(minutes/10);
     var total = all.length;
     var per = Math.ceil(total/6);
     var min = section*per;
