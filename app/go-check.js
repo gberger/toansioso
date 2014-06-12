@@ -3,15 +3,28 @@ var mailer = require('./mailer');
 var async = require('async');
 var moment = require('moment');
 
+var nullCbFn = function(callback) { callback(null); };
+
 module.exports = function(db, concurrency) {
   console.log('Starting check...');
 
   var users = db.get('users');
 
-  var section = parseInt(moment().minutes()/10);
 
   users.find({done: false}, function(err, all){
 
+    // weekday filter
+    // on sat&sun, only work every 4 hours
+    var weekday = moment().weekday();
+    if(weekday === 6 || weekday === 0) {
+      var hour = moment().hours();
+      if(hours % 4 !== 0){
+        console.log('Sat/sun skip.');
+        return nullCbFn;
+      }
+    }
+
+    var section = parseInt(moment().minutes()/10);
     var total = all.length;
     var per = Math.ceil(total/6);
     var min = section*per;
@@ -21,7 +34,7 @@ module.exports = function(db, concurrency) {
 
       if(i < min || i > max) {
         console.log('Skipping user ' + user.email + ' (' + i + ') for now.');
-        return;
+        return nullCbFn;
       }
 
       if(user.n === null || user.n === undefined){
