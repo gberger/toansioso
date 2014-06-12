@@ -34,6 +34,8 @@ module.exports = function(db, concurrency, partition) {
 
     if(partition === undefined || partition === null) {
       var partition = parseInt(minutes/10);
+    } else {
+      var partition = parseInt(partition);
     }
     
     var total = all.length;
