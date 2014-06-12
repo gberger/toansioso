@@ -34,7 +34,9 @@ Use `heroku config:set KEY=VALUE` to set the following configurations:
 
 For example, you'd need to run `heroku config:set MAIL_ACCOUNT=myemail@gmail.com`, etc.
 
-Now, run `heroku addons:open scheduler`, which will take you to your browser on the Scheduler dashboard. There, "Add Job". For the task name, use 'worker'. Keep the dyno size at 1X and set the frequency you'd like to run the TOA checking. Save it.
+Now, run `heroku addons:open scheduler`, which will take you to your browser on the Scheduler dashboard. There, you need to add 6 jobs like this:
+
+![alt tag](https://raw.github.com/gberger/toansioso/master/example-scheduler.png)
 
 Finally, `git push heroku master` to deploy the app!
 
