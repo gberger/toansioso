@@ -22,13 +22,13 @@ module.exports = function(db, concurrency) {
       // on sat&sun, only check every 4 hours
       if(hours % 4 !== 0){
         console.log('Weekend skip.');
-        return nullCbFn;
+        process.exit(0);
       }
     } else {
       // on weekdays, 
-      if(hours == 23 || hours == 0 || hours == 1 || hours == 3 || hours == 4 || hours == 5) {
+      if(hours == 23 ||  hours == 1 || hours == 3 ||  hours == 5) {
         console.log('Weekday late night skip.');
-        return nullCbFn;
+        process.exit(0);
       }
     }
 
