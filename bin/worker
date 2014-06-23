@@ -11,5 +11,6 @@ goCheck(db, concurrency, process.env.PARTITION);
 
 // Exit after 15 minutes if not done (!!)
 setTimeout(function(){
+  console.log("Timed out after 15 minutes.");
   process.exit(0);
 }, 15*60*1000);
