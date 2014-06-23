@@ -8,3 +8,8 @@ var db = monk(process.env.MONGOLAB_URI);
 var concurrency = Number(process.env.CONCURRENCY || 2);
 
 goCheck(db, concurrency, process.env.PARTITION);
+
+// Exit after 15 minutes if not done (!!)
+setTimeout(function(){
+  process.exit(0);
+}, 15*60*1000);
